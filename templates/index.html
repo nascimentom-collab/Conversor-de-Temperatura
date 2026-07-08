@@ -1,25 +1,49 @@
-<h1>Conversor de Temperatura</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Temperatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-<form method="POST">
+<div class="container">
 
-<input
-type="number"
-name="valor"
-placeholder="Digite um valor"
-required>
+    <h1>Conversor de Temperatura</h1>
 
-<select name="origem">
-    <option value="C">Celsius</option>
-    <option value="F">Fahrenheit</option>
-    <option value="K">Kelvin</option>
-</select>
+    <form method="POST">
 
-<select name="destino">
-    <option value="F">Fahrenheit</option>
-    <option value="C">Celsius</option>
-    <option value="K">Kelvin</option>
-</select>
+        <input
+            type="number"
+            name="valor"
+            placeholder="Digite um valor"
+            step="any"
+            required
+        >
 
-<button>Converter</button>
+        <select name="origem">
+            <option value="C">Celsius</option>
+            <option value="F">Fahrenheit</option>
+            <option value="K">Kelvin</option>
+        </select>
 
-</form>
+        <select name="destino">
+            <option value="F">Fahrenheit</option>
+            <option value="C">Celsius</option>
+            <option value="K">Kelvin</option>
+        </select>
+
+        <button type="submit">
+            Converter
+        </button>
+
+    </form>
+
+    {% if resultado != None %}
+        <h2>Resultado: {{ resultado }}</h2>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
