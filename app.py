@@ -36,14 +36,20 @@ def home():
 
     resultado = None
 
+    erro = None
+
     if request.method == "POST":
-        valor = float(request.form["valor"])
-        origem = request.form["origem"]
-        destino = request.form["destino"]
+        try:
+            valor = float(request.form["valor"])
+            origem = request.form["origem"]
+            destino = request.form["destino"]
 
-        resultado = round(converter(valor, origem, destino), 2)
+            resultado = round(converter(valor, origem, destino), 2)
 
-    return render_template("index.html", resultado=resultado)
+        except ValueError:
+            erro = "Digite um número válido."
+
+    return render_template("index.html", resultado=resultado, erro=erro)
 
 
 if __name__ == "__main__":
