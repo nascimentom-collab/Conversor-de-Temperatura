@@ -10,22 +10,22 @@ def converter(valor, origem, destino):
     if origem == destino:
         return valor
 
-    if origem == "C":
-        if destino == "F":
+    if origem == CELSIUS:
+        if destino == FAHRENHEIT:
             return (valor * 9/5) + 32
-        if destino == "K":
+        if destino == KELVIN:
             return valor + 273.15
 
-    if origem == "F":
-        if destino == "C":
+    if origem == FAHRENHEIT:
+        if destino == CELSIUS:
             return (valor - 32) * 5/9
-        if destino == "K":
+        if destino == KELVIN:
             return (valor - 32) * 5/9 + 273.15
 
-    if origem == "K":
-        if destino == "C":
+    if origem == KELVIN:
+        if destino == CELSIUS:
             return valor - 273.15
-        if destino == "F":
+        if destino == FAHRENHEIT:
             return (valor - 273.15) * 9/5 + 32
 
     return valor
