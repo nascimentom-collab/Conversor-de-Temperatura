@@ -1,28 +1,31 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
+CELSIUS = "C"
+FAHRENHEIT = "F"
+KELVIN = "K" 
 
 def converter(valor, origem, destino):
 
     if origem == destino:
         return valor
 
-    if origem == "C":
-        if destino == "F":
+    if origem == CELSIUS:
+        if destino == FAHRENHEIT:
             return (valor * 9/5) + 32
-        if destino == "K":
+        if destino == KELVIN:
             return valor + 273.15
 
-    if origem == "F":
-        if destino == "C":
+    if origem == FAHRENHEIT:
+        if destino == CELSIUS:
             return (valor - 32) * 5/9
-        if destino == "K":
+        if destino == KELVIN:
             return (valor - 32) * 5/9 + 273.15
 
-    if origem == "K":
-        if destino == "C":
+    if origem == KELVIN:
+        if destino == CELSIUS:
             return valor - 273.15
-        if destino == "F":
+        if destino == FAHRENHEIT:
             return (valor - 273.15) * 9/5 + 32
 
     return valor
@@ -33,14 +36,20 @@ def home():
 
     resultado = None
 
+    erro = None
+
     if request.method == "POST":
-        valor = float(request.form["valor"])
-        origem = request.form["origem"]
-        destino = request.form["destino"]
+        try:
+            valor = float(request.form["valor"])
+            origem = request.form["origem"]
+            destino = request.form["destino"]
 
-        resultado = round(converter(valor, origem, destino), 2)
+            resultado = round(converter(valor, origem, destino), 2)
 
-    return render_template("index.html", resultado=resultado)
+        except ValueError:
+            erro = "Digite um número válido."
+
+    return render_template("index.html", resultado=resultado, erro=erro)
 
 
 if __name__ == "__main__":
