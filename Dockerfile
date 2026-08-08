@@ -2,12 +2,12 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY requisitos.txt .
+COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requisitos.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 EXPOSE 80
 
-CMD ["python3", "app.py"]
+CMD ["python", "app.py"]
